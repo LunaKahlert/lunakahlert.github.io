@@ -51,6 +51,23 @@ window.randInt = (minN, maxN) => {
   return BigInt(Math.floor(Math.random() * range)) + minN;
 };
 
+// Berechne zufällige Primzahl x zwischen minN und maxN
+window.randPrime = (minN, maxN) => {
+  let p = 0n;
+  const MAX_TRIES = 10000;
+
+  for (let i = 0; i < MAX_TRIES; i++) {
+    p = randInt(minN, maxN);
+    if (isPrime(p)) {
+      return p;
+    }
+  }
+
+  throw Error(
+    `Could not find prime in range ${minN}...${maxN} in ${MAX_TRIES} tries.`
+  );
+};
+
 // Zufällige zu n teilerfremde Zahl
 window.randTeilerfremd = (n) => {
   let x = randInt(2n, n);
@@ -60,10 +77,17 @@ window.randTeilerfremd = (n) => {
   return x;
 };
 
-// function isTeilerfremd(a, b) { ... }
-// window.isTeilerfremd = isTeilerfremd;
+
 window.isTeilerfremd = (a, b) => {
-  // return ggt(a, b) == 1n;
   if (ggt(a, b) == 1n) return true;
   else return false;
+};
+
+window.legendre = (a, p) => {
+  if (a % p == 0n) return 0n;
+
+  for (let i = 0n; i <= p / 2n; i++) {
+    if ((i * i) % p == a % p) return 1n;
+  }
+  return -1n;
 };

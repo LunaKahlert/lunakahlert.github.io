@@ -1,30 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
-
-  <title>Informationsbereich</title>
-
-  <!-- Bootstrap-->
-  <link href="/css1/bootstrap.min.css" rel="stylesheet">
-  <link href="/css1/style.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.css"
     integrity="sha384-RZU/ijkSsFbcmivfdRBQDtwuwVqK7GMOw6IMvKyeWL2K5UAlyp6WonmB8m7Jd0Hn" crossorigin="anonymous" />
+  
+  <link href="/css1/bootstrap.min.css" rel="stylesheet">
+  <link href="/css1/style.css" rel="stylesheet">
   <link rel="stylesheet" href="/design.css" />
-
+  
   <!-- The loading of KaTeX is deferred to speed up page rendering -->
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.js"
     integrity="sha384-pK1WpvzWVBQiP0/GjnvRxV4mOb0oxFuyRxJlk6vVw146n3egcN5C925NCP7a7BY8"
     crossorigin="anonymous"></script>
+  <!-- To automatically render math in text elements, include the auto-render extension: -->
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/contrib/auto-render.min.js"
     integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous" onload='renderMathInElement(document.body, { delimiters: [
         {left: "$", right: "$", display: false},
         {left: "$$", right: "$$", display: true},
       ]});'></script>
-
+  <title>Homomorphe Kryptographie</title>
   <style>
     .condition {
       color: gray;
@@ -118,32 +116,25 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/index.html">Startseite</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/interactive.html">Interaktionsbereich</a>
+              </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
                   Informationsbereich
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                   <li><a class="dropdown-item" href="gm.html">Goldwasser-Micali-System</a></li>
                   <li><a class="dropdown-item" href="/informative.html">Benalohsystem mit Anwendungsbeipsiel</a></li>
-            </ul>
+                </ul>
           </div>
         </div>
       </nav>
     </div>
     <h2>
-      <a href="https://de.wikipedia.org/wiki/Benaloh-Kryptosystem" target="_blank" rel="noopener noreferrer">Benaloh
-        System</a>
-    </h2>
-    </h1>
-    <!-- <label for="r"
-                >Blockgröße <input type="text" id="blocksize" value="100"
-              /></label> -->
-    <h3>Paramter</h3>
-    <p>
-      <label for="m2">Blockgröße $ r =$
-        <input id="r" name="r" type="number" min="3" max="999" step="2" value="9" /></label>
-      <span class="condition">$ r \text{ ungerade}$</span>
-    </p>
+    <a href="https://de.wikipedia.org/wiki/Goldwasser-Micali-Kryptosystem" target="_blank" rel="noopener noreferrer">Goldwasser-Micali-System</a>
+  </h2>
     <p>
       <button id="regenerateKeys">Generiere Schlüsselpaar</button>
     </p>
@@ -151,54 +142,49 @@
     <h3>Privater Schlüssel</h3>
     <p>
       $p =$ <span class="valueFor p"></span>
-      <span class="condition absolute">$p \text{ prim}, r|(p-1), ggT(\frac{p-1}{r}, r) = 1$</span>
+      <span class="condition absolute">$p \text{ prim}$</span>
     </p>
     <p>
       $q =$ <span class="valueFor q"></span>
-      <span class="condition absolute">$q \text{ prim}, ggT(q-1,r) = 1$</span>
+      <span class="condition absolute">$q \text{ prim}$</span>
     </p>
     <h3>Öffentlicher Schlüssel</h3>
-    <p>
-      $r =$ <span class="valueFor r"></span>
-      <span class="condition absolute">Blockgröße</span>
-    </p>
     <p>
       $n =$ <span class="valueFor n"></span>
       <span class="condition absolute">$n = pq$</span>
     </p>
     <p>
       $y =$ <span class="valueFor y"></span>
-      <span class="condition absolute">$\text{Für alle } s | r, s \text{ prim}: y^{(p-1)(q-1)/s} \ne 1 \mod n,
-        ggT(y, n) = 1$</span>
-    </p>
-    <p style="color: gray">
-      $\phi =$ <span class="valueFor phi"></span>
-      <span class="condition absolute"> $ \phi = (p - 1)(q - 1) $</span>
+      <span class="condition absolute">$\displaystyle y \in (\mathrm{Z}/n\mathrm{Z})^*,
+        \left(\frac{y}{p}\right) = \left(\frac{y}{q}\right) = -1$</span>
     </p>
 
     <section>
       <h3>Verschlüsselung</h3>
       <p>
-        <label for="m1">$m_1 =$ <input id="m1" name="m1" type="number" min="0" max="1000" /></label>
-        <button id="encrypt1">Encrypt</button>
-        $c_1 =$ <span class="valueFor c1"></span> $u_1 =$
-        <span class="valueFor u1"></span>
-        <span class="condition">$c_1 = y^mu^r, u \in (\mathrm{Z}/n\mathrm{Z})^*$</span>
+      <p>
+        Nachricht $m \in \{0, 1\}$
+      </p>
+      <label for="m1">$m_1 =$ <input id="m1" name="m1" type="number" min="0" max="1" /></label>
+      <button id="encrypt1">Encrypt</button>
+      $c_1 =$ <span class="valueFor c1"></span> $u_1 =$
+      <span class="valueFor u1"></span>
+      <span class="condition">$c_1 = y^mu^2, u \in (\mathrm{Z}/n\mathrm{Z})^*$</span>
       </p>
       <p>
-        <label for="m2">$m_2 =$ <input id="m2" name="m2" type="number" min="0" max="1000" /></label>
+        <label for="m2">$m_2 =$ <input id="m2" name="m2" type="number" min="0" max="1" /></label>
         <button id="encrypt2">Encrypt</button>
         $c_2 =$ <span class="valueFor c2"></span> $u_2 =$
         <span class="valueFor u2"></span>
 
-        <span class="condition">$c_2 = y^mu^r, u \in (\mathrm{Z}/n\mathrm{Z})^*$</span>
+        <span class="condition">$c_2 = y^mu^2, u \in (\mathrm{Z}/n\mathrm{Z})^*$</span>
       </p>
     </section>
 
     <section>
       <h3>Homomorphie</h3>
       <p>
-        $ c_1 \cdot c_2 \equiv $ <span class="valueFor c1"></span> $ \cdot $
+        $ c = c_1 \cdot c_2 \equiv $ <span class="valueFor c1"></span> $ \cdot $
         <span class="valueFor c2"></span> $ \equiv $
         <span class="valueFor cResult"></span> $ \text{mod} \;n\; ($<span class="valueFor n"></span>$)$
       </p>
@@ -208,56 +194,27 @@
       <h3>Entschlüsselung</h3>
 
       <p>
-        <span class="valueFor cResult"></span> $ \overrightarrow{\tiny
+        $c_1:$ <span class="valueFor c1"></span> $ \overrightarrow{\tiny
+        \text{decrypt}} $
+        <span class="valueFor d1"></span>
+      </p>
+      <p>
+        $c_2:$ <span class="valueFor c2"></span> $ \overrightarrow{\tiny
+        \text{decrypt}} $
+        <span class="valueFor d2"></span>
+      </p>
+      <p>
+        $c:$ <span class="valueFor cResult"></span> $ \overrightarrow{\tiny
         \text{decrypt}} $
         <span class="valueFor mResult"></span>
       </p>
     </section>
-
-    <hr />
-    <h2>Notendurchschnitt</h2>
-    <p><button id="reset">Reset</button></p>
-    <div class="flex">
-      <div id="client">
-        <h3>Clients</h3>
-        <div id="client-list"></div>
-      </div>
-      <div id="server">
-        <h3>Server</h3>
-        <div id="server-state"></div>
-      </div>
-    </div>
-
-    <div class="mark-average">
-      <h3>Durchschnitt</h3>
-      <p>
-        Verschlüsselte Summe $ \equiv $ <span class="valueFor cSum"></span> $
-        \text{mod} \; n \;($<span class="valueFor n"></span>$)$
-      </p>
-      <p>
-        Entschlüsselte Summe $ \equiv $ <span class="valueFor mSum"></span> $
-        \text{mod} \; r \;($<span class="valueFor r"></span>$)$
-      </p>
-      <p>
-        $ \overline{\text{Noten}} = \sum \text{Noten} / \text{Anzahl} =\; $
-        <span class="valueFor mSum"></span> $ / $
-        <span class="valueFor numStudents"></span> $ = $
-        <span class="valueFor markAverage"></span>
-      </p>
-    </div>
-    <h3>Nachrichten</h3>
-    <ul id="log"></ul>  
   </div>
-
-  <script src="/util.js"></script>
-  <script src="/math.js"></script>
-  <script src="/benaloh.js"></script>
-  <script src="/index.js"></script>
-
-</body>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="util.js"></script>
+  <script src="math.js"></script>
+  <script src="gm.js"></script>
 </body>
 
 </html>
